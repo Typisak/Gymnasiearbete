@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal grounded_update(grounded)
+
 const UP_DIRECTION = Vector2.UP #Kan ändras för att gå på väggar etc.
 
 export var speed = 250 #Karaktärens gånghastighet
@@ -17,6 +19,7 @@ var falling = false
 var double_jumping = false
 #var jump_cancellation = false
 var idle = false
+var grounded
 
 var jumps_total = 0 #Räknare för antalet hopp gjorda
 var velocity = Vector2.ZERO #Rörelsevektorn
@@ -34,7 +37,6 @@ func character_state():
 	#var jump_cancellation = Input.is_action_just_released("jump") and velocity.y < 0
 	#TRUE om karaktären är stilla/idle
 	idle = is_on_floor() and is_zero_approx(velocity.x)
-	
 
 #func animation(): #AVKOMMENTERAS NÄR ANIMATIONER SKAPATS
 	#LÄGG TILL SPRITE FLIP
@@ -65,13 +67,19 @@ func _physics_process(delta):
 	if jumping:
 		velocity.y = -jump_strength 
 		jumps_total += 1
-	elif double_jumping:
-		if jumps_total < jump_quantity:
-			velocity.y = -jump2_strength
-			jumps_total += 1
+	#elif double_jumping:
+	#	if jumps_total < jump_quantity:
+	#		velocity.y = -jump2_strength
+	#		jumps_total += 1
 	elif idle or walking:
 		jumps_total = 0
 	
 	velocity = move_and_slide(velocity, UP_DIRECTION)
+	
+	var was_grounded = grounded
+	grounded = is_on_floor()
+	
+	if was_grounded == null || grounded != was_grounded:
+		emit_signal("grounded_update", grounded)
 	
 	#animation()
