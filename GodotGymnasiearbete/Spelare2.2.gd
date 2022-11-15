@@ -6,10 +6,10 @@ const UP_DIRECTION = Vector2.UP #Kan ändras för att gå på väggar etc.
 
 export var speed = 250 #Karaktärens gånghastighet
 
-export var gravity = 600 #Gravitationens styrka
-export var jump_quantity = 1 #Antalet hopp karaktären kan göra
-export var jump_strength = 300 #Första hoppets styrka
-export var jump2_strength = 250 #Andra hoppets styrka
+export var gravity = 1000 #Gravitationens styrka
+export var jump_quantity = 2 #Antalet hopp karaktären kan göra
+export var jump_strength = 400 #Första hoppets styrka
+export var jump2_strength = 300 #Andra hoppets styrka
 #Fler styrkor för andra hopp läggs till här
 
 #Variabler för karaktärens tillstånd
@@ -17,9 +17,10 @@ var walking = false
 var jumping = false
 var falling = false
 var double_jumping = false
-#var jump_cancellation = false
 var idle = false
 var grounded
+var stop_slope = true
+
 
 var jumps_total = 0 #Räknare för antalet hopp gjorda
 var velocity = Vector2.ZERO #Rörelsevektorn
@@ -32,9 +33,7 @@ func character_state():
 	#TRUE om karaktären faller
 	falling = velocity.y > 0 and not is_on_floor()
 	#TRUE om karaktären dubbelhoppar (Baserat på om den faller och hoppar)
-	double_jumping = Input.is_action_just_pressed("jump") and falling
-	#TRUE om ett hopp förhindras
-	#var jump_cancellation = Input.is_action_just_released("jump") and velocity.y < 0
+	double_jumping = Input.is_action_just_pressed("jump") and jumps_total > 0
 	#TRUE om karaktären är stilla/idle
 	idle = is_on_floor() and is_zero_approx(velocity.x)
 
@@ -54,6 +53,13 @@ func character_state():
 	#if idle:
 	#	(Animationsmetod)
 
+func grounded():
+	var was_grounded = grounded
+	grounded = is_on_floor()
+	
+	if was_grounded == null || grounded != was_grounded:
+		emit_signal("grounded_update", grounded)
+
 func _physics_process(delta):
 	var walk_direction = (
 		Input.get_action_strength("move_right")
@@ -67,19 +73,16 @@ func _physics_process(delta):
 	if jumping:
 		velocity.y = -jump_strength 
 		jumps_total += 1
-	#elif double_jumping:
-	#	if jumps_total < jump_quantity:
-	#		velocity.y = -jump2_strength
-	#		jumps_total += 1
+	elif double_jumping:
+		if jumps_total < jump_quantity:
+			velocity.y = -jump2_strength
+			jumps_total += 1
 	elif idle or walking:
 		jumps_total = 0
 	
-	velocity = move_and_slide(velocity, UP_DIRECTION)
 	
-	var was_grounded = grounded
-	grounded = is_on_floor()
+	velocity = move_and_slide(velocity, UP_DIRECTION, stop_slope)
 	
-	if was_grounded == null || grounded != was_grounded:
-		emit_signal("grounded_update", grounded)
+	grounded()
 	
 	#animation()

@@ -20,7 +20,7 @@ func _check_facing():
 		tween.start()
 
 
-func _process(delta):
+func _process(_delta):
 	_check_facing()
 	previous_position = get_camera_position()
 
