@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Fiende.png" type="Texture" id=1]
 [ext_resource path="res://Enemy.gd" type="Script" id=2]
+[ext_resource path="res://BounceArea.tscn" type="PackedScene" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -70,18 +71,14 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 15.5, 10 )
 
-[node name="Mob" type="KinematicBody2D"]
+[node name="Mob" type="KinematicBody2D" groups=["Enemy"]]
 collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 15 )
-frame = 8
+frame = 1
 playing = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.5, 0 )
-shape = SubResource( 16 )
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 0
@@ -90,6 +87,13 @@ autostart = true
 
 [node name="Wait" type="Timer" parent="."]
 one_shot = true
+
+[node name="BounceArea" parent="." instance=ExtResource( 3 )]
+collision_layer = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BounceArea"]
+position = Vector2( 0.5, 0 )
+shape = SubResource( 16 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="Wait" to="." method="_on_Wait_timeout"]

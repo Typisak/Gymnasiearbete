@@ -41,3 +41,8 @@ func _on_Wait_timeout():
 func wait():
 	$Wait.start()
 	wait = true
+
+func be_bounced_upon(bouncer):
+	if bouncer.has_method("bounce"):
+		bouncer.bounce()
+		queue_free()
