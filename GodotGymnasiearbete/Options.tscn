@@ -84,7 +84,7 @@ theme = ExtResource( 3 )
 custom_colors/font_color_focus = Color( 0.85098, 0.764706, 0.188235, 1 )
 custom_colors/font_color_hover = Color( 0.85098, 0.764706, 0.188235, 1 )
 custom_colors/font_color_pressed = Color( 0.231373, 0.619608, 0.152941, 1 )
-text = "Exit to main menu"
+text = "Back"
 align = 0
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

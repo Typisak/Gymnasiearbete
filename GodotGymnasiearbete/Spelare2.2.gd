@@ -6,7 +6,7 @@ signal death()
 signal respawn()
 
 const UP_DIRECTION = Vector2.UP #Kan ändras för att gå på väggar etc.
-const BOUNCE_VELOCITY = -500
+const BOUNCE_VELOCITY = -400
 
 export var speed = 250 #Karaktärens gånghastighet
 export var gravity = 1000 #Gravitationens styrka
@@ -117,6 +117,7 @@ func check_bounce(delta):
 				break
 
 func bounce(bounce_velocity = BOUNCE_VELOCITY):
+	$AnimatedSprite.play("Jump")
 	velocity.y = bounce_velocity
 
 func _physics_process(delta):
