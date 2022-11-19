@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=34 format=2]
 
-[ext_resource path="res://karaktär.png" type="Texture" id=1]
+[ext_resource path="res://Jump.png" type="Texture" id=1]
 [ext_resource path="res://Spelare2.2.gd" type="Script" id=2]
 [ext_resource path="res://Kamera.gd" type="Script" id=3]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 16 )
+[ext_resource path="res://Walk.png" type="Texture" id=4]
+[ext_resource path="res://Idle.png" type="Texture" id=5]
+[ext_resource path="res://JumpTest.png" type="Texture" id=6]
 
 [sub_resource type="Animation" id=5]
 length = 0.001
@@ -69,15 +69,147 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=4]
 resource_name = "rest"
 
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 1 )
+region = Rect2( 224, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 5 )
+region = Rect2( 48, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 5 )
+region = Rect2( 96, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 5 )
+region = Rect2( 144, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 1 )
+region = Rect2( 160, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 6 )
+region = Rect2( 32, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 28, 35 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 4 )
+region = Rect2( 48, 0, 28, 35 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 0, 28, 35 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 4 )
+region = Rect2( 144, 0, 28, 35 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 0, 28, 35 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 4 )
+region = Rect2( 240, 0, 28, 35 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 32 ) ],
+"loop": true,
+"name": "Fall",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 30.0
+}, {
+"frames": [ SubResource( 31 ) ],
+"loop": true,
+"name": "JumpEnd",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 33 ), SubResource( 34 ) ],
+"loop": true,
+"name": "Test",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "Test2",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 7.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 16 )
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
+
+[node name="DamageAndInvAnimation" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 5 )
+anims/damage = SubResource( 2 )
+anims/invulnerable = SubResource( 3 )
+anims/rest = SubResource( 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 13 )
+animation = "Test2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 one_way_collision_margin = 0.0
-
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -99,12 +231,6 @@ one_shot = true
 pause_mode = 2
 wait_time = 5.0
 one_shot = true
-
-[node name="DamageAndInvAnimation" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 5 )
-anims/damage = SubResource( 2 )
-anims/invulnerable = SubResource( 3 )
-anims/rest = SubResource( 4 )
 
 [node name="BounceRayCasts" type="Node2D" parent="."]
 
@@ -143,6 +269,7 @@ shape = SubResource( 1 )
 one_way_collision_margin = 0.0
 
 [connection signal="grounded_update" from="." to="Camera2D" method="_on_Player_grounded_update"]
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="timeout" from="Invulnerability" to="." method="_on_Invulnerability_timeout"]
 [connection signal="timeout" from="Reset" to="." method="_on_Reset_timeout"]
 [connection signal="area_entered" from="HitscannerEnemy" to="." method="_on_HitscannerEnemy_area_entered"]

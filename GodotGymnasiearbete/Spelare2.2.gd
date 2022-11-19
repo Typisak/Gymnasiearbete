@@ -45,21 +45,30 @@ func character_state():
 	#TRUE om karaktären är stilla/idle
 	idle = is_on_floor() and is_zero_approx(velocity.x)
 
-#func animation(): #AVKOMMENTERAS NÄR ANIMATIONER SKAPATS
-	#LÄGG TILL SPRITE FLIP
+func animation(): #AVKOMMENTERAS NÄR ANIMATIONER SKAPATS
+	$AnimatedSprite.speed_scale = 1
+	if velocity.x > 0:
+		$AnimatedSprite.flip_h = false
+	elif velocity.x < 0:
+		$AnimatedSprite.flip_h = true
 	#SPELA UPP ANIMATION BASERAT PÅ TILLSTÅND
 	#Animerar karaktärens hopp
-	#if jumping or double_jumping:
-	#	(Animationsmetod)
+	if jumping or double_jumping:
+		#$AnimatedSprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
+		$AnimatedSprite.play("Test")
 	#Animerar karaktärens gång
-	#if walking:
-	#	(Animationsmetod)
+	elif walking:
+		if Input.is_action_pressed("move_left") || Input.is_action_pressed("move_right"):
+			$AnimatedSprite.play("Walk")
+		else:
+			$AnimatedSprite.speed_scale = 0.5
+			$AnimatedSprite.play("Walk")
 	#Animerar karaktärens fall
-	#if falling:
-	#	(Animationsmetod)
+	elif falling:
+		$AnimatedSprite.play("Fall")
 	#Animerar Karaktärens stillastånd
-	#if idle:
-	#	(Animationsmetod)
+	elif idle:
+		$AnimatedSprite.play("Idle")
 
 func grounded():
 	var was_grounded = grounded
@@ -136,7 +145,7 @@ func _physics_process(delta):
 	
 	grounded()
 	
-	#animation()
+	animation()
 
 func _on_HitscannerEnemy_area_entered(area):
 	damage(1)
@@ -146,3 +155,8 @@ func _on_HitscannerSpikes_area_entered(area):
 
 
 
+
+
+func _on_AnimatedSprite_animation_finished():
+	if $AnimatedSprite.animation == "Test":
+		$AnimatedSprite.play("JumpEnd")
