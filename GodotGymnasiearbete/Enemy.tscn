@@ -72,12 +72,13 @@ animations = [ {
 extents = Vector2( 15.5, 10 )
 
 [node name="Mob" type="KinematicBody2D" groups=["Enemy"]]
+collision_layer = 2
 collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 15 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="Timer" type="Timer" parent="."]
@@ -89,7 +90,7 @@ autostart = true
 one_shot = true
 
 [node name="BounceArea" parent="." instance=ExtResource( 3 )]
-collision_layer = 9
+collision_layer = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BounceArea"]
 position = Vector2( 0.5, 0 )

@@ -3,6 +3,7 @@ extends KinematicBody2D
 signal grounded_update(grounded)
 signal health_updated(health)
 signal death()
+signal respawn()
 
 const UP_DIRECTION = Vector2.UP #Kan ändras för att gå på väggar etc.
 const BOUNCE_VELOCITY = -500
@@ -83,11 +84,18 @@ func damage(amount):
 		effects_damage.queue("invulnerable")
 
 func kill():
-	#Implementera dödsmekanism
-	pass
+	print("Du har dött")
+	emit_signal("death")
+	get_tree().paused = true
+	$Reset.start()
 
 func _on_Invulnerability_timeout():
 	 effects_damage.play("rest")
+
+func _on_Reset_timeout():
+	get_tree().paused = false
+	emit_signal("respawn")
+	get_tree().reload_current_scene()
 
 func check_bounce(delta):
 	if falling:
@@ -130,5 +138,11 @@ func _physics_process(delta):
 	
 	#animation()
 
-func _on_Area2D_area_entered(area):
+func _on_HitscannerEnemy_area_entered(area):
 	damage(1)
+
+func _on_HitscannerSpikes_area_entered(area):
+	damage(3)
+
+
+

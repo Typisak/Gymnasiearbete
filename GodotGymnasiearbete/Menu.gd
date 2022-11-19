@@ -1,29 +1,24 @@
 extends Control
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	$VBoxContainer/Start.grab_focus()
-
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 
 func _on_Start_pressed():
 	get_tree().change_scene("res://Node2D.tscn")
 
-
 func _on_Options_pressed():
-	pass # Replace with function body.
-
+	get_tree().change_scene("res://Options.tscn")
 
 func _on_Exit_pressed():
 	get_tree().quit()
+
+func _on_Start_mouse_entered():
+	$VBoxContainer/Start.grab_focus()
+
+
+func _on_Options_mouse_entered():
+	$VBoxContainer/Options.grab_focus()
+
+
+func _on_Exit_mouse_entered():
+	$VBoxContainer/Exit.grab_focus()

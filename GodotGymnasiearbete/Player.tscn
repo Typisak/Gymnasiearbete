@@ -95,6 +95,11 @@ script = ExtResource( 3 )
 wait_time = 1.5
 one_shot = true
 
+[node name="Reset" type="Timer" parent="."]
+pause_mode = 2
+wait_time = 5.0
+one_shot = true
+
 [node name="DamageAndInvAnimation" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 5 )
 anims/damage = SubResource( 2 )
@@ -121,12 +126,24 @@ cast_to = Vector2( 0, 4 )
 collision_mask = 8
 collide_with_areas = true
 
-[node name="Hitscanner" type="Area2D" parent="."]
+[node name="HitscannerEnemy" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitscanner"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitscannerEnemy"]
+shape = SubResource( 1 )
+one_way_collision_margin = 0.0
+
+[node name="HitscannerSpikes" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitscannerSpikes"]
 shape = SubResource( 1 )
 one_way_collision_margin = 0.0
 
 [connection signal="grounded_update" from="." to="Camera2D" method="_on_Player_grounded_update"]
 [connection signal="timeout" from="Invulnerability" to="." method="_on_Invulnerability_timeout"]
-[connection signal="area_entered" from="Hitscanner" to="." method="_on_Area2D_area_entered"]
+[connection signal="timeout" from="Reset" to="." method="_on_Reset_timeout"]
+[connection signal="area_entered" from="HitscannerEnemy" to="." method="_on_HitscannerEnemy_area_entered"]
+[connection signal="area_entered" from="HitscannerSpikes" to="." method="_on_HitscannerSpikes_area_entered"]
