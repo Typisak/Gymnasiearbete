@@ -6,7 +6,7 @@ signal death()
 signal respawn()
 
 const UP_DIRECTION = Vector2.UP #Kan ändras för att gå på väggar etc.
-const BOUNCE_VELOCITY = -400
+const BOUNCE_VELOCITY = -450
 
 export var speed = 250 #Karaktärens gånghastighet
 export var gravity = 1000 #Gravitationens styrka
@@ -70,6 +70,10 @@ func animation(): #AVKOMMENTERAS NÄR ANIMATIONER SKAPATS
 	elif idle:
 		$AnimatedSprite.play("Idle")
 
+func _on_AnimatedSprite_animation_finished():
+	if $AnimatedSprite.animation == "Test":
+		$AnimatedSprite.play("JumpEnd")
+
 func grounded():
 	var was_grounded = grounded
 	grounded = is_on_floor()
@@ -93,8 +97,6 @@ func damage(amount):
 		effects_damage.queue("invulnerable")
 
 func kill():
-	print("Du har dött")
-	emit_signal("death")
 	get_tree().paused = true
 	$Reset.start()
 
@@ -147,17 +149,15 @@ func _physics_process(delta):
 	grounded()
 	
 	animation()
+	
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if collision.collider.is_in_group("DamageTiles"):
+			damage(3)
 
 func _on_HitscannerEnemy_area_entered(area):
 	damage(1)
 
 func _on_HitscannerSpikes_area_entered(area):
-	damage(3)
+	damage(2)
 
-
-
-
-
-func _on_AnimatedSprite_animation_finished():
-	if $AnimatedSprite.animation == "Test":
-		$AnimatedSprite.play("JumpEnd")
