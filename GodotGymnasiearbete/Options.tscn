@@ -36,44 +36,72 @@ theme = ExtResource( 1 )
 columns = 2
 
 [node name="Label" type="Label" parent="GridContainer"]
-margin_right = 87.0
-margin_bottom = 22.0
+margin_right = 92.0
+margin_bottom = 17.0
 text = "Walk Right"
 
 [node name="Label2" type="Label" parent="GridContainer"]
-margin_left = 250.0
-margin_right = 300.0
-margin_bottom = 22.0
+margin_left = 262.0
+margin_right = 299.0
+margin_bottom = 17.0
 text = "D"
 align = 1
 
 [node name="Label3" type="Label" parent="GridContainer"]
-margin_top = 26.0
-margin_right = 87.0
-margin_bottom = 48.0
+margin_top = 21.0
+margin_right = 92.0
+margin_bottom = 38.0
 text = "Walk Left"
 
 [node name="Label4" type="Label" parent="GridContainer"]
-margin_left = 250.0
-margin_top = 26.0
-margin_right = 300.0
-margin_bottom = 48.0
+margin_left = 262.0
+margin_top = 21.0
+margin_right = 299.0
+margin_bottom = 38.0
 text = "A"
 align = 1
 
 [node name="Label5" type="Label" parent="GridContainer"]
-margin_top = 52.0
-margin_right = 87.0
-margin_bottom = 74.0
+margin_top = 42.0
+margin_right = 92.0
+margin_bottom = 59.0
 text = "Jump"
 
 [node name="Label6" type="Label" parent="GridContainer"]
-margin_left = 250.0
-margin_top = 52.0
-margin_right = 300.0
-margin_bottom = 74.0
+margin_left = 262.0
+margin_top = 42.0
+margin_right = 299.0
+margin_bottom = 59.0
 text = "Space"
-align = 2
+align = 1
+
+[node name="Label7" type="Label" parent="GridContainer"]
+margin_top = 63.0
+margin_right = 92.0
+margin_bottom = 80.0
+text = "Pause"
+
+[node name="Label8" type="Label" parent="GridContainer"]
+margin_left = 262.0
+margin_top = 63.0
+margin_right = 299.0
+margin_bottom = 80.0
+text = "Esc"
+align = 1
+
+[node name="Label9" type="Label" parent="GridContainer"]
+margin_top = 84.0
+margin_right = 92.0
+margin_bottom = 101.0
+text = "Reset (ingame)"
+
+[node name="Label10" type="Label" parent="GridContainer"]
+margin_left = 262.0
+margin_top = 84.0
+margin_right = 299.0
+margin_bottom = 101.0
+text = "R"
+align = 1
 
 [node name="Button" type="Button" parent="."]
 margin_left = 10.0

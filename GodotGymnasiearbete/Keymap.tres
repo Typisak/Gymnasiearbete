@@ -3,9 +3,10 @@
 [ext_resource path="res://ChelseaMarket-Regular.ttf" type="DynamicFontData" id=1]
 
 [sub_resource type="DynamicFont" id=1]
+size = 12
 font_data = ExtResource( 1 )
 
 [resource]
 default_font = SubResource( 1 )
-GridContainer/constants/hseparation = 163
+GridContainer/constants/hseparation = 170
 GridContainer/constants/vseparation = 4
