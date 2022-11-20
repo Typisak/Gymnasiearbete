@@ -15,10 +15,8 @@ func _on_Exit_pressed():
 func _on_Start_mouse_entered():
 	$VBoxContainer/Start.grab_focus()
 
-
 func _on_Options_mouse_entered():
 	$VBoxContainer/Options.grab_focus()
-
 
 func _on_Exit_mouse_entered():
 	$VBoxContainer/Exit.grab_focus()

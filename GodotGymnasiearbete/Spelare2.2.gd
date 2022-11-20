@@ -144,7 +144,7 @@ func _physics_process(delta):
 		jumps_total = 0
 	
 	check_bounce(delta)
-	velocity = move_and_slide(velocity, UP_DIRECTION, true)
+	velocity = move_and_slide(velocity, UP_DIRECTION)
 	
 	grounded()
 	

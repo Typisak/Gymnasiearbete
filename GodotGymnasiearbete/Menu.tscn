@@ -27,14 +27,14 @@ margin_right = 167.0
 margin_bottom = 45.0
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_right = 147.0
+margin_right = 190.0
 margin_bottom = 27.0
 theme = SubResource( 2 )
-text = "(Namn)"
+text = "Fisherman's Friend"
 
 [node name="Start" type="Button" parent="VBoxContainer"]
 margin_top = 31.0
-margin_right = 147.0
+margin_right = 190.0
 margin_bottom = 48.0
 focus_neighbour_top = NodePath("../Exit")
 theme = ExtResource( 2 )
@@ -46,7 +46,7 @@ align = 0
 
 [node name="Options" type="Button" parent="VBoxContainer"]
 margin_top = 52.0
-margin_right = 147.0
+margin_right = 190.0
 margin_bottom = 69.0
 theme = ExtResource( 2 )
 custom_colors/font_color_focus = Color( 0.85098, 0.764706, 0.188235, 1 )
@@ -57,7 +57,7 @@ align = 0
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 margin_top = 73.0
-margin_right = 147.0
+margin_right = 190.0
 margin_bottom = 90.0
 focus_neighbour_bottom = NodePath("../Start")
 theme = ExtResource( 2 )
