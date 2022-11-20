@@ -73,22 +73,6 @@ resource_name = "rest"
 atlas = ExtResource( 1 )
 region = Rect2( 224, 0, 29, 34 )
 
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 29, 34 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 5 )
-region = Rect2( 48, 0, 29, 34 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 5 )
-region = Rect2( 96, 0, 29, 34 )
-
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 5 )
-region = Rect2( 144, 0, 29, 34 )
-
 [sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 29, 34 )
@@ -117,9 +101,21 @@ region = Rect2( 160, 0, 29, 34 )
 atlas = ExtResource( 1 )
 region = Rect2( 192, 0, 29, 34 )
 
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 29, 34 )
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 5 )
+region = Rect2( 48, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 5 )
+region = Rect2( 96, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 5 )
+region = Rect2( 144, 0, 29, 34 )
 
 [sub_resource type="AtlasTexture" id=33]
 atlas = ExtResource( 6 )
@@ -128,6 +124,10 @@ region = Rect2( 0, 0, 29, 34 )
 [sub_resource type="AtlasTexture" id=34]
 atlas = ExtResource( 6 )
 region = Rect2( 32, 0, 29, 34 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 29, 34 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 4 )
@@ -160,29 +160,24 @@ animations = [ {
 "name": "Fall",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"loop": true,
+"name": "HoldJump(Not implemented)",
+"speed": 30.0
+}, {
 "frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"frames": [ SubResource( 33 ), SubResource( 34 ) ],
 "loop": true,
 "name": "Jump",
-"speed": 30.0
+"speed": 5.0
 }, {
 "frames": [ SubResource( 31 ) ],
 "loop": true,
 "name": "JumpEnd",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 33 ), SubResource( 34 ) ],
-"loop": true,
-"name": "Test",
-"speed": 5.0
-}, {
-"frames": [  ],
-"loop": true,
-"name": "Test2",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
@@ -205,7 +200,7 @@ anims/rest = SubResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 13 )
-animation = "Test2"
+animation = "Jump"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -268,9 +263,18 @@ collision_mask = 4
 shape = SubResource( 1 )
 one_way_collision_margin = 0.0
 
+[node name="HitscannerFinishline" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitscannerFinishline"]
+shape = SubResource( 1 )
+one_way_collision_margin = 0.0
+
 [connection signal="grounded_update" from="." to="Camera2D" method="_on_Player_grounded_update"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="timeout" from="Invulnerability" to="." method="_on_Invulnerability_timeout"]
 [connection signal="timeout" from="Reset" to="." method="_on_Reset_timeout"]
 [connection signal="area_entered" from="HitscannerEnemy" to="." method="_on_HitscannerEnemy_area_entered"]
 [connection signal="area_entered" from="HitscannerSpikes" to="." method="_on_HitscannerSpikes_area_entered"]
+[connection signal="area_entered" from="HitscannerFinishline" to="." method="_on_HitscannerFinishline_area_entered"]

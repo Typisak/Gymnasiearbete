@@ -55,7 +55,7 @@ func animation(): #AVKOMMENTERAS NÄR ANIMATIONER SKAPATS
 	#Animerar karaktärens hopp
 	if jumping or double_jumping:
 		#$AnimatedSprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
-		$AnimatedSprite.play("Test")
+		$AnimatedSprite.play("Jump")
 	#Animerar karaktärens gång
 	elif walking:
 		if Input.is_action_pressed("move_left") || Input.is_action_pressed("move_right"):
@@ -71,7 +71,7 @@ func animation(): #AVKOMMENTERAS NÄR ANIMATIONER SKAPATS
 		$AnimatedSprite.play("Idle")
 
 func _on_AnimatedSprite_animation_finished():
-	if $AnimatedSprite.animation == "Test":
+	if $AnimatedSprite.animation == "Jump":
 		$AnimatedSprite.play("JumpEnd")
 
 func grounded():
@@ -161,3 +161,5 @@ func _on_HitscannerEnemy_area_entered(area):
 func _on_HitscannerSpikes_area_entered(area):
 	damage(2)
 
+func _on_HitscannerFinishline_area_entered(area):
+	get_tree().change_scene("res://FinishScreen.tscn")
