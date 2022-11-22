@@ -41,10 +41,10 @@ margin_bottom = 17.0
 text = "Walk Right"
 
 [node name="Label2" type="Label" parent="GridContainer"]
-margin_left = 262.0
+margin_left = 199.0
 margin_right = 299.0
 margin_bottom = 17.0
-text = "D"
+text = "D/Arrow Left"
 align = 1
 
 [node name="Label3" type="Label" parent="GridContainer"]
@@ -54,11 +54,11 @@ margin_bottom = 38.0
 text = "Walk Left"
 
 [node name="Label4" type="Label" parent="GridContainer"]
-margin_left = 262.0
+margin_left = 199.0
 margin_top = 21.0
 margin_right = 299.0
 margin_bottom = 38.0
-text = "A"
+text = "A/Arrow Right"
 align = 1
 
 [node name="Label5" type="Label" parent="GridContainer"]
@@ -68,11 +68,11 @@ margin_bottom = 59.0
 text = "Jump"
 
 [node name="Label6" type="Label" parent="GridContainer"]
-margin_left = 262.0
+margin_left = 199.0
 margin_top = 42.0
 margin_right = 299.0
 margin_bottom = 59.0
-text = "Space"
+text = "Space/Arrow up"
 align = 1
 
 [node name="Label7" type="Label" parent="GridContainer"]
@@ -82,7 +82,7 @@ margin_bottom = 80.0
 text = "Pause"
 
 [node name="Label8" type="Label" parent="GridContainer"]
-margin_left = 262.0
+margin_left = 199.0
 margin_top = 63.0
 margin_right = 299.0
 margin_bottom = 80.0
@@ -96,7 +96,7 @@ margin_bottom = 101.0
 text = "Reset (ingame)"
 
 [node name="Label10" type="Label" parent="GridContainer"]
-margin_left = 262.0
+margin_left = 199.0
 margin_top = 84.0
 margin_right = 299.0
 margin_bottom = 101.0
